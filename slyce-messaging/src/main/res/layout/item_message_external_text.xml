@@ -13,7 +13,7 @@
         android:id="@+id/message_scout_text_image_view_avatar_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/shape_oval_navy">
@@ -36,6 +36,14 @@
             android:layout_width="48dp"
             android:layout_height="48dp" />
     </FrameLayout>
+    <ImageView
+        android:src="@drawable/ic_high_priority"
+        android:id="@+id/high_priority"
+        android:layout_height="48dp"
+        android:layout_width="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@+id/message_scout_text_image_view_avatar_group" />
 
     <ImageView
         android:id="@+id/message_scout_text_image_view_carrot"
@@ -53,7 +61,7 @@
         android:id="@+id/message_scout_text_view_group_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/message_scout_text_image_view_avatar_group"
+        android:layout_toRightOf="@+id/high_priority"
         android:background="@drawable/shape_rounded_rectangle_white"
         android:padding="16dp">
 
@@ -68,7 +76,7 @@
             android:textColor="@color/text_navy"
             android:textSize="14sp"
             app:font="museo_sans_500.otf"
-            tools:text="You can get pizza at Zio's. It is located just beneath your office!"/>
+            tools:text="You can get pizza at Zio's. It is located just beneath your office!" />
     </FrameLayout>
 
     <it.slyce.messaging.view.text.FontTextView
