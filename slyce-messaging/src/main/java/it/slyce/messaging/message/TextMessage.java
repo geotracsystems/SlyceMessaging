@@ -11,7 +11,8 @@ import it.slyce.messaging.message.messageItem.internalUser.text.MessageInternalU
  */
 public class TextMessage extends Message {
     private String text;
-
+    private boolean highPriority;
+    
     public String getText() {
         return text;
     }
@@ -20,6 +21,10 @@ public class TextMessage extends Message {
         this.text = text;
     }
 
+    public boolean getHighPriority() { return highPriority; }
+    
+    public void setHighPriority(boolean highPriority) { this.highPriority = highPriority; }
+    
     @Override
     public MessageItem toMessageItem(Context context){
         if (this.source == MessageSource.EXTERNAL_USER)

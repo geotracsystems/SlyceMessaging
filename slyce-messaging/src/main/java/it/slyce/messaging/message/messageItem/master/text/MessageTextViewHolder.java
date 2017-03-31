@@ -15,6 +15,7 @@ public abstract class MessageTextViewHolder extends MessageViewHolder {
     public ImageView carrot;
     public TextView text;
     public FrameLayout bubble;
+    public ImageView highPriority;
 
     public MessageTextViewHolder(View itemView, CustomSettings customSettings) {
         super(itemView, customSettings);
