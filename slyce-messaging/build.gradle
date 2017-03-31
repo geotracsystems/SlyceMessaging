@@ -1,28 +1,6 @@
 apply plugin: 'com.android.library'
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'slyce-messaging'
-
-    publishedGroupId = 'it.slyce.slycemessaging'
-    libraryName = 'slyce-messaging'
-    artifact = 'slyce-messaging'
-
-    libraryDescription = 'A messaging library for Android'
-
-    siteUrl = 'https://github.com/snipsnap/SlyceMessaging'
-    gitUrl = 'https://github.com/snipsnap/SlyceMessaging.git'
-
-    libraryVersion = '1.0.1'
-
-    developerId = 'snipsnap'
-    developerName = 'SnipSnap'
-    developerEmail = 'support@snipsnap.it'
-
-    licenseName = 'The MIT License'
-    licenseUrl = 'https://opensource.org/licenses/mit-license.php'
-    allLicenses = ["MIT"]
-}
+apply plugin: 'maven'
+apply from: '../lib_common.gradle'
 
 android {
     compileSdkVersion 24
@@ -62,6 +40,9 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+
+    group = "geotrac.android"
+    version = determineVersion("1.1")
 }
 
 
@@ -91,6 +72,33 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 }
 
-// Place it at the end of the file
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: getPublishUrl()) {
+                authentication(userName: "${nexus_username}", password: "${nexus_password}")
+            }
+        }
+    }
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
