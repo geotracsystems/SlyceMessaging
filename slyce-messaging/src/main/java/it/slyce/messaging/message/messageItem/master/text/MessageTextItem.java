@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ import it.slyce.messaging.utils.DateUtils;
  */
 public class MessageTextItem extends MessageItem {
     private Context context;
-    private String avatarUrl;
 
     public MessageTextItem(TextMessage textMessage, Context context) {
         super(textMessage);
@@ -73,19 +73,45 @@ public class MessageTextItem extends MessageItem {
             });
 
             if (isFirstConsecutiveMessageFromSource) {
-                Glide.with(context).load(avatarUrl).into(messageTextViewHolder.avatar);
+                showAvatar(messageTextViewHolder);
             }
     
             showPriority(messageTextViewHolder);
             
-            messageTextViewHolder.avatar.setVisibility(isFirstConsecutiveMessageFromSource && !TextUtils.isEmpty(avatarUrl) ? View.VISIBLE : View.INVISIBLE);
             messageTextViewHolder.avatarContainer.setVisibility(isFirstConsecutiveMessageFromSource ? View.VISIBLE : View.INVISIBLE);
             messageTextViewHolder.carrot.setVisibility(isFirstConsecutiveMessageFromSource ? View.VISIBLE : View.INVISIBLE);
-            messageTextViewHolder.initials.setVisibility(isFirstConsecutiveMessageFromSource && TextUtils.isEmpty(avatarUrl) ? View.VISIBLE : View.GONE);
             messageTextViewHolder.timestamp.setVisibility(isLastConsecutiveMessageFromSource ? View.VISIBLE : View.GONE);
         }
     }
 
+    private void showAvatar(MessageTextViewHolder holder) {
+        if (!TextUtils.isEmpty(message.getAvatarUrl())) {
+            showAvatarUrl(message.getAvatarUrl(), holder);
+            return;
+        }
+        if (message.getAvatarResourceId() > 0) {
+            showAvatarResource(message.getAvatarResourceId(), holder);
+            return;
+        }
+        showEmptyAvatar(holder);
+    }
+    
+    private void showAvatarUrl(String avatarUrl, MessageTextViewHolder holder) {
+        Glide.with(context).load(avatarUrl).into(holder.avatar);
+        holder.avatar.setVisibility(View.VISIBLE);
+        holder.initials.setVisibility(View.VISIBLE);
+    }
+    
+    private void showAvatarResource(@DrawableRes int avatarResId, MessageTextViewHolder holder) {
+        holder.avatar.setImageResource(avatarResId);
+        holder.avatar.setVisibility(View.VISIBLE);
+    }
+    
+    private void showEmptyAvatar(MessageTextViewHolder holder) {
+        holder.avatar.setVisibility(View.INVISIBLE);
+        holder.initials.setVisibility(View.INVISIBLE);
+    }
+        
     @Override
     public MessageItemType getMessageItemType() {
         if (message.getSource() == MessageSource.EXTERNAL_USER) {
