@@ -105,11 +105,12 @@ public class MessageTextItem extends MessageItem {
     private void showAvatarResource(@DrawableRes int avatarResId, MessageTextViewHolder holder) {
         holder.avatar.setImageResource(avatarResId);
         holder.avatar.setVisibility(View.VISIBLE);
+        holder.initials.setVisibility(View.GONE);
     }
     
     private void showEmptyAvatar(MessageTextViewHolder holder) {
         holder.avatar.setVisibility(View.INVISIBLE);
-        holder.initials.setVisibility(View.INVISIBLE);
+        holder.initials.setVisibility(View.GONE);
     }
         
     @Override
