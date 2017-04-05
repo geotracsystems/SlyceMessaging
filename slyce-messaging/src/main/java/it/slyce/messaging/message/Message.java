@@ -1,6 +1,7 @@
 package it.slyce.messaging.message;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 
 import it.slyce.messaging.message.messageItem.MessageItem;
 
@@ -14,6 +15,7 @@ public abstract class Message {
     String displayName;
     String userId;
     String initials;
+    int avatarResId;
 
     public long getDate() {
         return date;
@@ -39,6 +41,10 @@ public abstract class Message {
         this.avatarUrl = avatarUrl;
     }
 
+    public int getAvatarResourceId() { return avatarResId; }
+    
+    public void setAvatarResId(@DrawableRes int avatarResId) { this.avatarResId = avatarResId; }
+    
     public String getDisplayName() {
         return displayName;
     }
