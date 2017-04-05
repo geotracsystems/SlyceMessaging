@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -13,10 +14,10 @@ import com.bumptech.glide.Glide;
 import it.slyce.messaging.R;
 import it.slyce.messaging.message.MessageSource;
 import it.slyce.messaging.message.TextMessage;
-import it.slyce.messaging.utils.DateUtils;
 import it.slyce.messaging.message.messageItem.MessageItem;
 import it.slyce.messaging.message.messageItem.MessageItemType;
 import it.slyce.messaging.message.messageItem.MessageViewHolder;
+import it.slyce.messaging.utils.DateUtils;
 
 /**
  * Created by matthewpage on 6/27/16.
@@ -74,7 +75,9 @@ public class MessageTextItem extends MessageItem {
             if (isFirstConsecutiveMessageFromSource) {
                 Glide.with(context).load(avatarUrl).into(messageTextViewHolder.avatar);
             }
-
+    
+            showPriority(messageTextViewHolder);
+            
             messageTextViewHolder.avatar.setVisibility(isFirstConsecutiveMessageFromSource && !TextUtils.isEmpty(avatarUrl) ? View.VISIBLE : View.INVISIBLE);
             messageTextViewHolder.avatarContainer.setVisibility(isFirstConsecutiveMessageFromSource ? View.VISIBLE : View.INVISIBLE);
             messageTextViewHolder.carrot.setVisibility(isFirstConsecutiveMessageFromSource ? View.VISIBLE : View.INVISIBLE);
@@ -95,5 +98,17 @@ public class MessageTextItem extends MessageItem {
     @Override
     public MessageSource getMessageSource() {
         return message.getSource();
+    }
+    
+    private void showPriority(MessageTextViewHolder holder) {
+        ImageView highPriority = holder.highPriority;
+        if (highPriority == null) {
+            return;
+        }
+        if (((TextMessage)message).getHighPriority()) {
+            highPriority.setVisibility(View.VISIBLE);
+        } else {
+            highPriority.setVisibility(View.INVISIBLE);
+        }
     }
 }
