@@ -1,6 +1,7 @@
 package it.slyce.messaging.message.messageItem.spinner;
 
 import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -16,6 +17,8 @@ public class SpinnerViewHolder extends MessageViewHolder {
     public SpinnerViewHolder(View itemView, CustomSettings customSettings) {
         super(itemView, customSettings);
         this.spinner = (ProgressBar) itemView.findViewById(R.id.loading_bar);
-        this.spinner.getIndeterminateDrawable().setColorFilter(R.color.text_pink, PorterDuff.Mode.MULTIPLY);
+        this.spinner.getIndeterminateDrawable().setColorFilter(
+                ContextCompat.getColor(itemView.getContext(), R.color.text_pink),
+                PorterDuff.Mode.MULTIPLY);
     }
 }

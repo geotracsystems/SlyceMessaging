@@ -15,7 +15,7 @@ import it.slyce.messaging.R;
 /**
  * Created by John C. Hunchar on 3/2/16.
  */
-public class FixedAspectRatioImageView extends ImageView {
+public class FixedAspectRatioImageView extends android.support.v7.widget.AppCompatImageView {
     private static final float DEFAULT_WIDTH_TO_HEIGHT_RATIO = 1.0f;
 
     private float mWidthToHeightRatio;
@@ -33,12 +33,6 @@ public class FixedAspectRatioImageView extends ImageView {
     public FixedAspectRatioImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr, 0);
-    }
-
-    @TargetApi(VERSION_CODES.LOLLIPOP)
-    public FixedAspectRatioImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

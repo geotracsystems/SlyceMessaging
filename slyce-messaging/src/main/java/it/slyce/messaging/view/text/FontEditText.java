@@ -5,14 +5,13 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 import it.slyce.messaging.R;
 
 /**
  * Created by John C. Hunchar on 2/2/16.
  */
-public class FontEditText extends EditText {
+public class FontEditText extends android.support.v7.widget.AppCompatEditText {
     private static final String VALUE_FONT_DIR_PREFIX = "fonts/";
 
     public FontEditText(Context context) {

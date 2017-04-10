@@ -55,7 +55,7 @@
         android:layout_marginLeft="-4dp"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/vd_ic_user_carrot"
+        android:src="@drawable/vd_ic_user_carrot"
         android:tint="@color/background_white"/>
 
     <FrameLayout
@@ -87,7 +87,7 @@
         android:layout_marginBottom="@dimen/message_timestamp_margin_bottom"
         android:layout_marginTop="@dimen/message_timestamp_margin_top"
         android:gravity="right"
-        android:singleLine="true"
+        android:maxLines="1"
         android:textColor="@color/text_gray_darkest"
         android:textSize="10sp"
         tools:text="12:29pm" />

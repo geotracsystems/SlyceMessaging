@@ -1,6 +1,7 @@
 package it.slyce.messaging;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -259,7 +260,8 @@ public class SlyceMessagingFragment extends Fragment implements OnClickListener 
             }
         }, 0, 62, TimeUnit.SECONDS);
     }
-
+    
+    @TargetApi(23)
     private void startLoadMoreMessagesListener() {
         if (Build.VERSION.SDK_INT >= 23)
             mRecyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
